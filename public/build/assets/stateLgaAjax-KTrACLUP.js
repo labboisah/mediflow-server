@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",function(){$('select[name="state"]').on("change",function(){let e=$(this).val();e?$.ajax({url:"/ajax/state/"+e+"/get-lgas",type:"GET",dataType:"json",success:function(t){$('select[name="lga"]').empty(),$.each(t,function(a,n){$('select[name="lga"]').append('<option value="'+a+'">'+n+"</option>")})}}):$('select[name="lga"]').empty()})});

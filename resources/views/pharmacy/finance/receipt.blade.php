@@ -1,0 +1,22 @@
+@extends('layouts.modern')
+
+@section('title', 'Pharmacy Receipt')
+
+@section('content')
+    <x-ui.page title="Pharmacy Payment Receipt" subtitle="Receipt: {{ $payment->payment_id }}">
+        <x-slot:actions><a href="{{ route(auth()->user()->hasRole('pharmacy_technician') ? 'pharmacy.transactions.index' : 'pharmacy.finance.payments') }}" class="mf-focus inline-flex items-center justify-center gap-2 rounded-md border border-med-line bg-white px-3 py-2 text-sm font-semibold text-med-ink shadow-sm transition hover:bg-med-canvas"><i class="bi bi-arrow-left"></i>Back</a><x-ui.button type="button" onclick="printPharmacyFinanceReceipt()"><i class="bi bi-printer"></i>Print</x-ui.button></x-slot:actions>
+        <x-ui.card title="Receipt Details" subtitle="{{ config('app.title') }} | {{ config('app.address') }}">
+            <div id="pharmacy-receipt">
+                @if($transaction->patient_name)<p class="mb-4"><strong>Patient:</strong> {{ $transaction->patient_name }}</p>@endif
+                <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3"><div><p class="text-sm text-med-muted">Bill Number</p><p class="font-semibold text-med-ink">{{ $transaction->bill?->bill_number ?? 'N/A' }}</p></div><div><p class="text-sm text-med-muted">Payment Method</p><p class="font-semibold text-med-ink">{{ $payment->paymentMethod?->name ?? 'N/A' }}</p></div><div><p class="text-sm text-med-muted">Reference</p><p class="font-semibold text-med-ink">{{ $payment->reference_number ?? 'N/A' }}</p></div><div><p class="text-sm text-med-muted">Date</p><p class="font-semibold text-med-ink">{{ $payment->payment_date?->format('M d, Y h:i A') }}</p></div><div><p class="text-sm text-med-muted">Collected By</p><p class="font-semibold text-med-ink">{{ $payment->recordedBy?->name ?? 'System' }}</p></div><div><p class="text-sm text-med-muted">Status</p><x-ui.badge variant="success">{{ ucfirst($payment->status) }}</x-ui.badge></div></div>
+                <div class="mt-6"><x-ui.table class="shadow-none"><thead class="bg-med-canvas text-left text-xs font-semibold uppercase text-med-muted"><tr><th class="px-4 py-3">Item</th><th class="px-4 py-3">Batch</th><th class="px-4 py-3 text-right">Price</th><th class="px-4 py-3 text-right">Qty</th><th class="px-4 py-3 text-right">Subtotal</th></tr></thead><tbody class="divide-y divide-med-line bg-white">@foreach($transaction->stockTransactionItems as $item)<tr><td class="px-4 py-4 font-semibold text-med-ink">{{ $item->medicineBatch?->medicine?->name ?? 'N/A' }}</td><td class="px-4 py-4 text-med-muted">{{ $item->medicineBatch?->batch_number ?? 'N/A' }}</td><td class="px-4 py-4 text-right text-med-muted">&#8358;{{ number_format($item->price, 2) }}</td><td class="px-4 py-4 text-right text-med-muted">{{ $item->quantity }}</td><td class="px-4 py-4 text-right font-semibold text-med-ink">&#8358;{{ number_format($item->subtotal, 2) }}</td></tr>@endforeach
+                    @foreach($transaction->serviceItems as $item)<tr><td class="px-4 py-4 font-semibold">{{ $item->name }}</td><td class="px-4 py-4">Service</td><td class="px-4 py-4 text-right">&#8358;{{ number_format($item->price, 2) }}</td><td class="px-4 py-4 text-right">{{ $item->quantity }}</td><td class="px-4 py-4 text-right">&#8358;{{ number_format($item->subtotal, 2) }}</td></tr>@endforeach</tbody><tfoot class="bg-med-canvas"><tr><th colspan="4" class="px-4 py-3 text-right text-med-ink">Amount Paid</th><th class="px-4 py-3 text-right text-med-ink">&#8358;{{ number_format($payment->amount, 2) }}</th></tr></tfoot></x-ui.table></div>
+            </div>
+        </x-ui.card>
+    </x-ui.page>
+
+    <div id="pharmacy-finance-receipt-print" class="hidden">@include('pharmacy.partials.combined-receipt')</div>
+    <style>.thermal-receipt{color:#000;font-family:monospace;font-size:13.5px;line-height:1.25;max-width:72mm;width:72mm}.thermal-receipt p{margin:0 0 3px}.thermal-receipt table{border-collapse:collapse;width:100%}.thermal-receipt td{padding:2px 0;vertical-align:top}.thermal-receipt .divider{border-top:1px dashed #000;margin:6px 0}.thermal-receipt .text-right{text-align:right}</style>
+    @include('pharmacy.partials.thermal-printer')
+    <script>function printPharmacyFinanceReceipt(){var template=document.getElementById('pharmacy-finance-receipt-print');if(!template){return alert('Pharmacy receipt template not found.')}printPharmacyReceipt(template.innerHTML)}</script>
+@endsection

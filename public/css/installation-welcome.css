@@ -1,0 +1,79 @@
+*{box-sizing:border-box}
+body{margin:0;background:#fff;color:#172c35;font-family:Inter,Segoe UI,Arial,sans-serif;line-height:1.6}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--brand-accent);outline-offset:5px}
+.site-header,main,footer{max-width:1280px;margin:auto}
+.site-header{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:28px 40px}
+.brand{display:flex;align-items:center;gap:14px;font-size:19px;font-weight:750;overflow-wrap:anywhere}
+.brand img{width:52px;height:52px;object-fit:contain}
+.brand small{display:block;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#647780}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:20px;border:1px solid var(--brand-accent);border-radius:8px;padding:13px 22px;font-size:14px;font-weight:650;cursor:pointer}
+.button-primary{background:var(--brand-accent);color:#fff}
+.button-outline{background:transparent;color:var(--brand-accent)}
+.hero{margin:12px 24px 0;padding:76px 56px;background:var(--brand-background);border-radius:22px;display:grid;grid-template-columns:1.25fr 1fr;align-items:center;gap:70px;min-height:550px}
+.eyebrow{font-size:11px;font-weight:750;letter-spacing:2px;text-transform:uppercase;color:var(--brand-accent)}
+.eyebrow span{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--brand-accent);margin-right:10px}
+h1{font-size:clamp(36px,4.4vw,62px);line-height:1.1;letter-spacing:-2px;font-weight:650;margin:25px 0;overflow-wrap:anywhere}
+.welcome-statement{font-size:17px;line-height:1.8;color:#50636d;white-space:pre-line;overflow-wrap:anywhere}
+.actions{display:flex;align-items:center;flex-wrap:wrap;gap:14px;margin-top:32px}
+.welcome-panel{border:1px solid #ffffff;background:#ffffffcf;border-radius:16px;padding:36px;box-shadow:0 16px 48px #173c3510;overflow-wrap:anywhere}
+.panel-symbol{display:flex;align-items:center;justify-content:center;width:88px;height:88px;border-radius:22px;background:var(--brand-accent);color:#fff;font-size:40px;margin-bottom:44px}
+.welcome-panel h2{font-size:26px;line-height:1.3;margin:12px 0}
+.address{font-size:13px;color:#647780}
+.panel-note{border-top:1px solid #dce5e4;margin-top:32px;padding-top:20px;display:flex;align-items:center;gap:12px;font-size:12px;color:#647780}
+.services{padding:66px 40px;display:grid;grid-template-columns:1fr 2fr;gap:55px}
+.services h2{font-size:30px;line-height:1.2;margin-top:12px}
+.service-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.service{display:flex;align-items:center;gap:14px;border-bottom:1px solid #e1e8e8;padding:16px 0}
+.service h3{font-size:14px;margin:0;flex:1}
+.service-number{font-size:11px;color:#81918e}
+.service i{color:var(--brand-accent)}
+footer{border-top:1px solid #e1e8e8;display:flex;justify-content:space-between;gap:20px;padding:28px 40px;font-size:12px;color:#647780}
+body[data-layout=centered] .hero{grid-template-columns:1fr;text-align:center;gap:30px;padding-left:100px;padding-right:100px}
+body[data-layout=centered] .actions{justify-content:center}
+body[data-layout=centered] .welcome-panel{max-width:650px;width:100%;margin:auto;padding:24px}
+body[data-layout=centered] .panel-symbol{width:58px;height:58px;font-size:28px;margin:0 auto 18px}
+body[data-layout=centered] .panel-note{justify-content:center}
+body[data-layout=panel] .hero{background:var(--brand-accent);color:#fff;border-radius:4px}
+body[data-layout=panel] .hero-copy .eyebrow,body[data-layout=panel] .welcome-statement{color:#e3eaf5}
+body[data-layout=panel] .hero-copy .eyebrow span{background:#fff}
+body[data-layout=panel] .hero-copy .button{border-color:#fff;color:#fff}
+body[data-layout=panel] .hero-copy .button-primary{background:#fff;color:var(--brand-accent)}
+body[data-layout=panel] .welcome-panel{background:#fff;color:#172c35;box-shadow:none;border-radius:4px}
+body[data-template=enterprise_hospital] .hero{grid-template-columns:1.5fr 1fr}
+body[data-template=pharmacy] .panel-symbol{border-radius:50%}
+body[data-template=general_clinic] .hero{border-radius:22px 80px 22px 22px}
+@media(max-width:760px){.site-header{padding:20px;gap:12px}
+.brand{font-size:15px}
+.brand img{width:38px;height:38px}
+.site-header .button{padding:10px 12px;font-size:12px;gap:8px}
+.hero,body[data-template=enterprise_hospital] .hero{grid-template-columns:1fr;margin:0 12px;padding:38px 24px;gap:30px;min-height:0}
+body[data-layout=centered] .hero{padding:38px 24px}
+h1{letter-spacing:-1px}
+.welcome-panel{padding:24px}
+.panel-symbol{margin-bottom:24px}
+.services{padding:40px 24px;grid-template-columns:1fr;gap:16px}
+.service-grid{grid-template-columns:1fr}
+footer{padding:24px;flex-wrap:wrap}
+}
+
+
+/* Optional installation artwork; absent values preserve package templates. */
+.hero{position:relative;isolation:isolate;overflow:hidden}
+.hero-background{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.hero.has-background:before{content:"";position:absolute;inset:0;background:var(--brand-background);opacity:.88;z-index:-1}
+.welcome-artwork{display:block;width:100%;max-height:300px;object-fit:contain;border-radius:12px;margin-bottom:24px}
+.supporting-artwork{padding:32px 40px;text-align:center}
+.supporting-artwork img{max-width:100%;max-height:260px;object-fit:contain}
+body[data-custom-colors=true] .hero,body[data-custom-colors=true] .welcome-panel{color:var(--brand-text)}
+body[data-custom-colors=true] .welcome-statement{color:var(--brand-text)}
+body[data-custom-colors=true][data-layout=panel] .hero{background:var(--brand-background)}
+body[data-custom-colors=true][data-layout=panel] .hero-copy .eyebrow{color:var(--brand-accent)}
+body[data-custom-colors=true][data-layout=panel] .hero-copy .button{border-color:var(--brand-accent);color:var(--brand-accent)}
+body[data-custom-colors=true][data-layout=panel] .hero-copy .button-primary{background:var(--brand-accent);color:white}
+body .hero.has-background .hero-copy,body .hero.has-background .welcome-statement{color:var(--brand-text)}
+
+body[data-layout=panel] .hero.has-background .hero-copy .eyebrow{color:var(--brand-accent)}
+body[data-layout=panel] .hero.has-background .hero-copy .button{border-color:var(--brand-accent);color:var(--brand-accent)}
+body[data-layout=panel] .hero.has-background .hero-copy .button-primary{background:var(--brand-accent);color:#fff}

@@ -1,0 +1,1 @@
+@extends('network.layout') @section('network')<h1>Partner clinical cases</h1><section>@forelse($rows as $c)<p><a href="{{ route('network.case',$c) }}">{{ $c->uuid }}</a> ? {{ $c->kind }} &middot; {{ $c->status }}</p>@empty<p>No cases for your assigned patients.</p>@endforelse{{ $rows->links() }}</section>@endsection

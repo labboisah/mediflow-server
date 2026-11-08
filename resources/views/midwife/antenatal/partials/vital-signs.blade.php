@@ -1,0 +1,1 @@
+<x-ui.card title="Vital Signs"><dl class="grid gap-4 text-sm md:grid-cols-3">@foreach(['blood_pressure'=>'Blood Pressure','weight'=>'Weight','height'=>'Height'] as $field=>$label)<div><dt class="text-med-muted">{{ $label }}</dt><dd class="font-semibold text-med-ink">{{ $antenatalCare->{$field} ?? 'N/A' }}</dd></div>@endforeach</dl></x-ui.card>

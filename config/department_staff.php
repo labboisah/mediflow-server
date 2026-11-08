@@ -1,0 +1,40 @@
+<?php
+
+return [
+    'roles' => [
+        'pharmacist' => ['pharmacy', 'billing'],
+        'pharmacy_technician' => ['pharmacy', 'billing'],
+        'lab_scientist' => ['laboratory'],
+        'lab_technician' => ['laboratory'],
+        'radiologist' => ['radiology'],
+        'radiographer' => ['radiology'],
+        'doctor' => ['doctor', 'clinical_care', 'patient_records'],
+        'nurse' => ['nursing', 'clinical_care', 'patient_records'],
+        'midwife' => ['maternity', 'patient_records'],
+        'record' => ['patient_records'],
+        'accountant' => ['billing'],
+        'finance_officer' => ['finance', 'billing'],
+    ],
+    // Match department names, never user-submitted department IDs.
+    'departments' => [
+        'pharm' => ['pharmacist', 'pharmacy_technician'],
+        'lab' => ['lab_scientist', 'lab_technician'],
+        'radio' => ['radiologist', 'radiographer'],
+        'matern' => ['midwife', 'nurse'],
+        'midwi' => ['midwife', 'nurse'],
+        'obst' => ['doctor', 'midwife', 'nurse'],
+        'emergency' => ['doctor', 'nurse'],
+        'pediatr' => ['doctor', 'nurse'],
+        'paediatr' => ['doctor', 'nurse'],
+        'nurs' => ['nurse'],
+        'record' => ['record'],
+        'registr' => ['record'],
+        'account' => ['accountant', 'finance_officer'],
+        'financ' => ['finance_officer', 'accountant'],
+        'bill' => ['accountant'],
+        'clinic' => ['doctor', 'nurse'],
+        'medic' => ['doctor', 'nurse'],
+        'outpatient' => ['doctor', 'nurse'],
+        'consult' => ['doctor', 'nurse'],
+    ],
+];

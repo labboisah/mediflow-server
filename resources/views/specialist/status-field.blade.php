@@ -1,0 +1,1 @@
+<x-ui.select name="is_active" label="Status"><option value="1" @selected($active)>Active</option><option value="0" @selected(!$active)>Inactive</option></x-ui.select>
